@@ -78,6 +78,7 @@ public class BoardFragment extends Fragment {
                 TextView itemCount2 = (TextView) mBoardView.getHeaderView(newColumn).findViewById(R.id.item_count);
                 itemCount2.setText(Integer.toString(mBoardView.getAdapter(newColumn).getItemCount()));
             }
+            
 
             @Override
             public void onItemDragEnded(int fromColumn, int fromRow, int toColumn, int toRow) {
@@ -96,6 +97,7 @@ public class BoardFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Board");
 
         addColumnList();
+        addEmptyColumnList();
     }
 
     @Override
@@ -134,19 +136,52 @@ public class BoardFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+private void addEmptyColumnList()
+{
+    String [] arrayofmethods = {};
+    final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
+    int addItems = 15;
+    for (int i = 0; i < arrayofmethods.length; i++) {
+        long id = sCreatedItems++;
+        mItemArray.add(new Pair<>(id, arrayofmethods[i]));
+    }
 
+    final int column = mColumns;
+    final ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.column_item, R.id.item_layout, true);
+    final View header = View.inflate(getActivity(), R.layout.column_header, null);
+    ((TextView) header.findViewById(R.id.text)).setText("Your Program");
+    ((TextView) header.findViewById(R.id.item_count)).setText("" + addItems);
+    header.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            long id = sCreatedItems++;
+            Pair item = new Pair<>(id, "Test " + id);
+            mBoardView.addItem(column, 0, item, true);
+            //mBoardView.moveItem(4, 0, 0, true);
+            //mBoardView.removeItem(column, 0);
+            //mBoardView.moveItem(0, 0, 1, 3, false);
+            //mBoardView.replaceItem(0, 0, item1, true);
+            ((TextView) header.findViewById(R.id.item_count)).setText("" + mItemArray.size());
+        }
+    });
+
+    mBoardView.addColumnList(listAdapter, header, false);
+    mColumns++;
+
+}
     private void addColumnList() {
+        String [] arrayofmethods = {"move forward", "move backward", "move left", "move right"};
         final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
         int addItems = 15;
-        for (int i = 0; i < addItems; i++) {
+        for (int i = 0; i < arrayofmethods.length; i++) {
             long id = sCreatedItems++;
-            mItemArray.add(new Pair<>(id, "Item " + id));
+            mItemArray.add(new Pair<>(id, arrayofmethods[i]));
         }
 
         final int column = mColumns;
         final ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.column_item, R.id.item_layout, true);
         final View header = View.inflate(getActivity(), R.layout.column_header, null);
-        ((TextView) header.findViewById(R.id.text)).setText("Column " + (mColumns + 1));
+        ((TextView) header.findViewById(R.id.text)).setText("Methods");
         ((TextView) header.findViewById(R.id.item_count)).setText("" + addItems);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
