@@ -95,19 +95,37 @@ public class BoardFragment extends Fragment {
                 System.out.println("fuck from row " + fromRow);
                 System.out.println("fuck to col " + toColumn);
                 System.out.println("fuck from col " + fromColumn);
-                String value = "";
+                String value = getValue(fromColumn, fromRow);
+
+                if (value.equals("for(){")) {
+                    View v1 = LayoutInflater.from(BoardFragment.this.getContext()).inflate(R.layout.timedialog, null);
+                    final EditText secondsText;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(BoardFragment.this.getContext());
+                    builder.setMessage("How many times should we run this loop?");
+                    builder.setView(v1);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    secondsText = (EditText) v1.findViewById(R.id.secondEditText);
+                    int numLoops;
+                    if (secondsText.getText().toString().equals("")) {
+                        numLoops = 0;
+                    } else {
+                        numLoops = Integer.parseInt(secondsText.getText().toString());
+                    }
+                     value = "for(int i = 0;i < " + numLoops + ";i++){";
+                }
 
                 if (fromColumn == 0 && toColumn == 0){
-                    methodValuesLeft.add(toRow, methodValuesLeft.get(fromRow));
+                    methodValuesLeft.add(toRow, value);
                     methodValuesLeft.remove(fromRow);
                 } else if (fromColumn == 0 && toColumn == 1){
-                    methodValuesRight.add(toRow, methodValuesLeft.get(fromRow));
+                    methodValuesRight.add(toRow, value);
                     methodValuesLeft.remove(fromRow);
                 } else if (fromColumn == 1 && toColumn == 0){
-                    methodValuesLeft.add(toRow, methodValuesRight.get(fromRow));
+                    methodValuesLeft.add(toRow, value);
                     methodValuesRight.remove(fromRow);
                 } else if (fromColumn == 1 && toColumn == 1){
-                    methodValuesRight.add(toRow, methodValuesRight.get(fromRow));
+                    methodValuesRight.add(toRow, value);
                     methodValuesRight.remove(fromRow);
                 }
                 for (String val: methodValuesLeft){
@@ -116,25 +134,17 @@ public class BoardFragment extends Fragment {
                 for (String val: methodValuesRight){
                     System.out.println("right " + val);
                 }
-
-
-                View v1 = LayoutInflater.from(BoardFragment.this.getContext()).inflate(R.layout.timedialog, null);
-                final EditText secondsText;
-                AlertDialog.Builder builder = new AlertDialog.Builder(BoardFragment.this.getContext());
-                builder.setMessage("How many times should we run this loop?");
-                builder.setView(v1);
-                AlertDialog alert = builder.create();
-                alert.show();
-                secondsText = (EditText) v1.findViewById(R.id.secondEditText);
-                int numLoops;
-                if (secondsText.getText().toString().equals("")) {
-                    numLoops = 0;
-                }else{
-                    numLoops = Integer.parseInt(secondsText.getText().toString());
-                }
             }
         });
         return view;
+    }
+
+    private String getValue(int col, int row){
+        if (col == 0){
+            return methodValuesLeft.get(row);
+        } else {
+            return methodValuesRight.get(row);
+        }
     }
 
     @Override
@@ -218,7 +228,7 @@ private void addEmptyColumnList()
 
 }
     private void addColumnList() {
-        String [] arrayofmethods = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()"};
+        String [] arrayofmethods = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"};
         for (int i = 0; i < arrayofmethods.length; i++) {
             long id = sCreatedItems++;
             mItemArray.add(new Pair<>(id, arrayofmethods[i]));
