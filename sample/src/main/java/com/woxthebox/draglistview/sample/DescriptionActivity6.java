@@ -7,30 +7,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static com.woxthebox.draglistview.sample.GameActivity.descriptionTextString;
-import static com.woxthebox.draglistview.sample.GameActivity.stageTextString;
-
-public class DescriptionActivity extends AppCompatActivity {
+public class DescriptionActivity6 extends AppCompatActivity {
 
     Button nextButton;
-    static TextView textStage;
-    static TextView textDescription;
+    TextView textDescription;
+    TextView textStage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-        textStage = (TextView) findViewById(R.id.text_stage);
-        textDescription = (TextView) findViewById(R.id.text_description);
-        textDescription.setText("Move the car forwards once");
-        textStage.setText("Stage 1");
+
         nextButton = (Button) findViewById(R.id.next_button);
+        textDescription = (TextView) findViewById(R.id.text_description);
+        textStage = (TextView) findViewById(R.id.text_stage);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent go = new Intent(DescriptionActivity.this, GameActivity.class);
+                Intent go = new Intent(DescriptionActivity6.this, GameActivity.class);
                 startActivity(go);
             }
         });
+        textDescription.setText("Move the car in a zig zag, making it go forward and right three times");
+        textStage.setText("Stage 6");
     }
 }

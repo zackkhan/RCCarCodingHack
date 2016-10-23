@@ -8,40 +8,40 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/wallpaper"
     tools:context="com.woxthebox.draglistview.sample.DescriptionActivity">
 
-    <Button
-        android:text="Next"
+    <TextView
+        android:text="For this level, we are going to..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:id="@+id/text_description"
+        android:textSize="20sp"
+        android:textColor="#002a48"/>
+
+    <Button
+        android:text="Play Stage"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="85dp"
-        android:id="@+id/next_button" />
+        android:layout_marginBottom="16dp"
+        android:id="@+id/next_button"
+        android:background="@drawable/right_rectangle_background"
+        android:textSize="24sp"
+        android:textColor="#b2eaff" />
 
     <TextView
-        android:text="TextView"
+        android:text="Stage #"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/stageName"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp"
-        android:textSize="24sp"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/next_button"
-        android:layout_alignEnd="@+id/next_button"
-        android:textColor="#000000" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_height="250dp"
-        android:layout_below="@+id/stageName"
-        android:layout_toStartOf="@+id/next_button"
-        android:layout_marginTop="64dp"
-        android:id="@+id/stageDescription"
-        android:textSize="30sp"
-        android:layout_width="600dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="#000000" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/text_stage"
+        android:textSize="24sp"
+        android:textColor="#002699"/>
 </RelativeLayout>

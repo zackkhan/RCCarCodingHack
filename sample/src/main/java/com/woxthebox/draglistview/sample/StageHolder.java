@@ -46,8 +46,28 @@ public class StageHolder extends RecyclerView.Adapter<StageHolder.ViewHolder> {
                 Context mContext = view.getContext();
                 StageActivity.whichStage = position + 1;
                 Log.d("myTag", StageActivity.whichStage + "");
-                Intent go = new Intent(mContext, DescriptionActivity.class);
-                mContext.startActivity(go);
+                if (StageActivity.whichStage % 6 == 1) {
+                    Intent go = new Intent(mContext, DescriptionActivity.class);
+                    mContext.startActivity(go);
+                } else if (StageActivity.whichStage % 6 == 2) {
+                    Intent go = new Intent(mContext, DescriptionActivity2.class);
+                    mContext.startActivity(go);
+                } else if (StageActivity.whichStage % 6 == 3) {
+                    Intent go = new Intent(mContext, DescriptionActivity3.class);
+                    mContext.startActivity(go);
+                } else if (StageActivity.whichStage % 6 == 4) {
+                    Intent go = new Intent(mContext, DescriptionActivity4.class);
+                    mContext.startActivity(go);
+                } else if (StageActivity.whichStage % 6 == 5) {
+                    Intent go = new Intent(mContext, DescriptionActivity5.class);
+                    mContext.startActivity(go);
+                } else if (StageActivity.whichStage % 6 == 0) {
+                    Intent go = new Intent(mContext, DescriptionActivity6.class);
+                    mContext.startActivity(go);
+                } else {
+                    Intent go = new Intent(mContext, DescriptionActivity.class);
+                    mContext.startActivity(go);
+                }
             }
         });
     }

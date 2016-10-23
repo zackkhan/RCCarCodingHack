@@ -186,7 +186,7 @@ else if (element.contains ("for{"))
                 for (String stringData : BoardFragment.methodValuesRight) {
                     System.out.println("run " + stringData);
                 }
-                readIn();
+
                 isCorrect();
                 //BoardFragment.sendDataArduino();
 
@@ -251,28 +251,27 @@ else if (element.contains ("for{"))
             case 3:
                 stageTextString = "Stage 3";
                 descriptionTextString = "Move the car forwards five times. Be careful, you only have one move() block!";
-                String [] methodValues3 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();",  "for(i=0; i<5; i++)"};
+                String [] methodValues3 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();",  "for(i=0; i<5; i++){", "}"};
                 return methodValues3;
             case 4:
                 stageTextString = "Stage 4";
-                descriptionTextString = "Move the car forwards 4 times, then move left 4 times. Be careful, you only have one two move blocks!";
-                String [] methodValues4 = {"stepForward();", "turnLeft();", "for(i=0; i<4; i++", "for(i=0; i<4; i++" };
+                descriptionTextString = "Move the car forwards 4 times, then move backwards 4 times. Be careful, you only have one two move blocks!";
+                String [] methodValues4 = {"stepForward();", "stepBackward();", "for(i=0; i<4; i++){", "for(i=0; i<4; i++){", "}", "}" };
                 return methodValues4;
 
             case 5:
                 stageTextString = "Stage 5";
-                descriptionTextString = "Move the car forwards 5 times, then move left 4 times. Be careful, you only have one two move blocks!";
-                String [] methodValues5 = {"stepForward();", "turnLeft();", "for(i=0; i<5; i++", "for(i=0; i<4; i++" };
+                descriptionTextString = "Move the car forwards 5 times, then two times backwards, then left once. Be careful, you only have one two move blocks!";
+                String [] methodValues5 = {"stepForward();", "turnLeft();", "stepForward();", "for(i=0; i<5; i++){", "for(i=0; i<2; i++){", "}", "}"};
                 return methodValues5;
 
 
 
             case 6:
                 stageTextString = "Stage 6" ;
-                descriptionTextString = "Move the car in a square, making four steps for each side of the square";
-                String [] methodValues6 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight(); for(i=0; i<4; i++",
-                "for(i=0; i<4; i++"}; //needs a nested for loop lol
-
+                descriptionTextString = "Move the car in a zig zag, making it go forward and right three times";
+                String [] methodValues6 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();", "for(i=0; i<3; i++)", "}",
+                "for(i=0; i<2; i++){", "}" }; //needs a nested for loop lol
                 return methodValues6;
 
 
@@ -286,35 +285,102 @@ else if (element.contains ("for{"))
         public boolean isCorrect()
     {
         ArrayList<String> correctAnswer = new ArrayList<String>();
-        switch (whichStage) {
+        switch (whichStage % 6) {
             case 1:
            correctAnswer.add("stepForward();");
 if (correctAnswer.equals(BoardFragment.methodValuesRight))
-    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-                else
+{Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+bt.sendMessage("1");
+}
+else
     Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
 
         return true;
 
             case 2:
+                correctAnswer.clear();
                 correctAnswer.add("stepForward();");
                 correctAnswer.add ("stepForward();");
                 correctAnswer.add ("turnLeft();");
 
-                if (correctAnswer.equals(BoardFragment.methodValuesRight))
-                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+                if (correctAnswer.equals(BoardFragment.methodValuesRight)) {
+                    Toast.makeText(GameActivity.this, "You are correct! Great job!", Toast.LENGTH_LONG).show();
+                    bt.sendMessage("2");
+                }
                 else
                     Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
 
             case 3:
-                correctAnswer.add("for(i=0; i<5; i++)");
+                correctAnswer.clear();
+                correctAnswer.add("for(i=0; i<5; i++){");
                 correctAnswer.add ("stepForward();");
+                correctAnswer.add("}");
 
-                if (correctAnswer.equals(BoardFragment.methodValuesRight))
+              //  if (correctAnswer.equals(BoardFragment.methodValuesRight))
+               // {
+                    bt.sendMessage("3");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+               // }
+              //  else
+               //     Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+            case 4:
+                correctAnswer.clear();
+                correctAnswer.add("for(i=0; i<5; i++){");
+                correctAnswer.add ("stepForward();");
+                correctAnswer.add("for(i=0; i<4; i++){");
+                correctAnswer.add ("stepBackward();");
+                correctAnswer.add("}");
+                correctAnswer.add("}");
+
+              //  if (correctAnswer.equals(BoardFragment.methodValuesRight))
+              //  {
+                    bt.sendMessage("4");
+                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+             //   }
+              //  else
+              //      Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+            case 5:
+                correctAnswer.clear();
+                correctAnswer.add("for(i=0; i<5; i++){");
+                correctAnswer.add ("stepForward();");
+                correctAnswer.add("for(i=0; i<2; i++){");
+                correctAnswer.add ("stepBackward();");
+                correctAnswer.add("turnLeft();");
+                correctAnswer.add("}");
+                correctAnswer.add("}");
+
+               // if (correctAnswer.equals(BoardFragment.methodValuesRight))
+                //{
+                    bt.sendMessage("5");
+                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+            //    }
+            //    else
+             //       Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+
+            case 0:
+                correctAnswer.clear();
+                correctAnswer.add("for(i=0; i<2; i++){");
+                correctAnswer.add("for(i=0; i<3; i++){");
+                correctAnswer.add ("stepForward();");
+                correctAnswer.add("turnRight();");
+                correctAnswer.add("}");
+                correctAnswer.add("}");
+
+
+              //  if (correctAnswer.equals(BoardFragment.methodValuesRight))
+              //  {
+                    bt.sendMessage("6");
+                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+              //  }
+              //  else
+              //      Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+
         }
+
+
+
+
+
         return false;
     }
 
