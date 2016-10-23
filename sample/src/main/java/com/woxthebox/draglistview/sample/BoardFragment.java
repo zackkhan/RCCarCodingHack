@@ -147,13 +147,17 @@ public class BoardFragment extends Fragment {
         }
     }
 
+    public static void initMethodValuesLeft(String[] values){
+
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Board");
 
-        addColumnList();
+        addColumnList(0);
         addEmptyColumnList();
     }
 
@@ -182,7 +186,7 @@ public class BoardFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 return true;
             case R.id.action_add_column:
-                addColumnList();
+                addColumnList(0);
                 return true;
             case R.id.action_remove_column:
                 mBoardView.removeColumn(0);
@@ -227,11 +231,17 @@ private void addEmptyColumnList()
     }
 
 }
-    private void addColumnList() {
-        String [] arrayofmethods = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"};
-        for (int i = 0; i < arrayofmethods.length; i++) {
-            long id = sCreatedItems++;
-            mItemArray.add(new Pair<>(id, arrayofmethods[i]));
+    private void addColumnList(int col) {
+        if (col == 0){
+            for (int i = 0; i < methodValuesLeft.size(); i++) {
+                long id = sCreatedItems++;
+                mItemArray.add(new Pair<>(id, methodValuesLeft.get(i)));
+            }
+        } else if (col == 1){
+            for (int i = 0; i < methodValuesRight.size(); i++) {
+                long id = sCreatedItems++;
+                mItemArray.add(new Pair<>(id, methodValuesRight.get(i)));
+            }
         }
 
         final int column = mColumns;

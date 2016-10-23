@@ -53,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("are we running3");
-                for (String stringData : BoardFragment.methodValuesRight){
+                for (String stringData : BoardFragment.methodValuesRight) {
                     System.out.println("run " + stringData);
                 }
                 //BoardFragment.sendDataArduino();
@@ -100,13 +100,16 @@ public class GameActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void generateLevelInformation(int whichStage){
+    private void generateLevelInformation(int whichStage) {
         Log.d("myTag", "Playing level " + whichStage);
-        switch (whichStage){
+
+        switch (whichStage) {
             case 1:
                 stageTextString = "Stage 1";
                 descriptionTextString = "For this stage, move the car forwards five times. Be careful, you only have one move() block!";
+                BoardFragment.initMethodValuesLeft({"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"});
                 break;
         }
     }
+}
 }
