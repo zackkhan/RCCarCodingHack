@@ -108,7 +108,10 @@ public class GameActivity extends AppCompatActivity {
         for (String element: BoardFragment.methodValuesRight)
         {
 if (element.contains("Forward()"))
+{
+
     stepForward();
+}
  else if (element.contains("Backward()"))
      stepBackward();
  else  if (element.contains("Left()"))
@@ -134,7 +137,9 @@ else if (element.contains ("for{"))
         int numofloops;
     }
     private void stepForward() {
+
        bt.sendMessage("1");
+
         System.out.println("ITS WORKING");
     }
     private void stepBackward()
@@ -146,7 +151,7 @@ else if (element.contains ("for{"))
     }
     private void turnRight()
     {
-
+        bt.sendMessage("4");
     }
     public void readIn(String s)
     {

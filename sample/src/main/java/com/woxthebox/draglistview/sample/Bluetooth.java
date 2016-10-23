@@ -525,6 +525,9 @@ public class Bluetooth {
             // Get the message bytes and tell the BluetoothChatService to write
             byte[] send = (message + EOT).getBytes();
             this.write(send);
+            for(int i = 0; i < send.length; ++i) {
+                System.out.println(send[i]);
+            }
         }
     }
 
