@@ -40,6 +40,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import static com.woxthebox.draglistview.sample.StageActivity.whichStage;
 
 public class GameActivity extends AppCompatActivity {
     public final String TAG = "Main";
@@ -55,22 +60,22 @@ public class GameActivity extends AppCompatActivity {
     Button runButton;
 
 
-    /*public void connectService(){
+    public void connectService(){
         try {
-            status.setText("Connecting...");
+           // status.setText("Connecting...");
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (bluetoothAdapter.isEnabled()) {
                 bt.start();
                 bt.connectDevice("HC-06");
                 Log.d(TAG, "Btservice started - listening");
-                status.setText("Connected");
+             //   status.setText("Connected");
             } else {
                 Log.w(TAG, "Btservice started - bluetooth is not enabled");
-                status.setText("Bluetooth Not enabled");
+             //   status.setText("Bluetooth Not enabled");
             }
         } catch(Exception e){
             Log.e(TAG, "Unable to start bt ",e);
-            status.setText("Unable to connect " +e);
+            //status.setText("Unable to connect " +e);
         }
     }
 
@@ -96,7 +101,7 @@ public class GameActivity extends AppCompatActivity {
                     break;
             }
         }
-    }; */
+    };
 
     public void readIn()
     {
@@ -129,13 +134,15 @@ else if (element.contains ("for{"))
         int numofloops;
     }
     private void stepForward() {
-        bt.sendMessage("1");
+       bt.sendMessage("1");
+        System.out.println("ITS WORKING");
     }
     private void stepBackward()
     {
-
+        bt.sendMessage("2");
     }
     private void turnLeft() {
+        bt.sendMessage("3");
     }
     private void turnRight()
     {
@@ -161,11 +168,11 @@ else if (element.contains ("for{"))
         if (savedInstanceState == null) {
             showFragment(BoardFragment.newInstance());
         }
-    /*    bt = new Bluetooth(this, mHandler);
-        connectService();*/
+        bt = new Bluetooth(this, mHandler);
+        connectService();
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
-        generateLevelInformation(StageActivity.whichStage);
+        generateLevelInformation(whichStage);
         runButton = (Button) findViewById(R.id.runButton);
         runButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +182,7 @@ else if (element.contains ("for{"))
                     System.out.println("run " + stringData);
                 }
                 readIn();
+                isCorrect();
                 //BoardFragment.sendDataArduino();
 
             }
@@ -238,7 +246,7 @@ else if (element.contains ("for{"))
             case 3:
                 stageTextString = "Stage 3";
                 descriptionTextString = "Move the car forwards five times. Be careful, you only have one move() block!";
-                String [] methodValues3 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight(); for(i=0; i<5; i++"};
+                String [] methodValues3 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();",  "for(i=0; i<5; i++)"};
                 return methodValues3;
             case 4:
                 stageTextString = "Stage 4";
@@ -269,5 +277,44 @@ else if (element.contains ("for{"))
         }
         return new String[0];
     }
+
+        public boolean isCorrect()
+    {
+        ArrayList<String> correctAnswer = new ArrayList<String>();
+        switch (whichStage) {
+            case 1:
+           correctAnswer.add("stepForward();");
+if (correctAnswer.equals(BoardFragment.methodValuesRight))
+    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+                else
+    Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+
+        return true;
+
+            case 2:
+                correctAnswer.add("stepForward();");
+                correctAnswer.add ("stepForward();");
+                correctAnswer.add ("turnLeft();");
+
+                if (correctAnswer.equals(BoardFragment.methodValuesRight))
+                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+
+            case 3:
+                correctAnswer.add("for(i=0; i<5; i++)");
+                correctAnswer.add ("stepForward();");
+
+                if (correctAnswer.equals(BoardFragment.methodValuesRight))
+                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+
+
+
 }
 

@@ -10,15 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.woxthebox.draglistview.sample.DescriptionActivity">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="169dp"
-        android:id="@+id/textView" />
-
     <Button
         android:text="Next"
         android:layout_width="wrap_content"
@@ -27,4 +18,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="85dp"
         android:id="@+id/next_button" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stageName"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/next_button"
+        android:layout_alignEnd="@+id/next_button"
+        android:textColor="#000000" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_height="250dp"
+        android:layout_below="@+id/stageName"
+        android:layout_toStartOf="@+id/next_button"
+        android:layout_marginTop="64dp"
+        android:id="@+id/stageDescription"
+        android:textSize="30sp"
+        android:layout_width="600dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#000000" />
 </RelativeLayout>
