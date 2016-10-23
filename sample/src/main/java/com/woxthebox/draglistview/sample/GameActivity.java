@@ -100,16 +100,16 @@ public class GameActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void generateLevelInformation(int whichStage) {
+    public static String[] generateLevelInformation(int whichStage) {
         Log.d("myTag", "Playing level " + whichStage);
 
         switch (whichStage) {
             case 1:
-                stageTextString = "Stage 1";
-                descriptionTextString = "For this stage, move the car forwards five times. Be careful, you only have one move() block!";
+                //stageTextString = "Stage 1";
+                //descriptionTextString = "For this stage, move the car forwards five times. Be careful, you only have one move() block!";
                 String[] methodValues = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"};
-                BoardFragment.initMethodValuesLeft(methodValues);
-                break;
+                return methodValues;
         }
+        return new String[0];
     }
 }

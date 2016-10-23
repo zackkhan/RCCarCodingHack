@@ -45,7 +45,6 @@ import java.util.ArrayList;
 public class BoardFragment extends Fragment {
 
     private static int sCreatedItems = 0;
-    private static boolean ran = false;
     private BoardView mBoardView;
     private int mColumns;
     ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
@@ -98,7 +97,7 @@ public class BoardFragment extends Fragment {
                 System.out.println("fuck from col " + fromColumn);
                 String value = getValue(fromColumn, fromRow);
 
-                if (value.equals("for(){")) {
+                /*if (value.equals("for(){")) {
                     View v1 = LayoutInflater.from(BoardFragment.this.getContext()).inflate(R.layout.timedialog, null);
                     final EditText secondsText;
                     AlertDialog.Builder builder = new AlertDialog.Builder(BoardFragment.this.getContext());
@@ -115,7 +114,7 @@ public class BoardFragment extends Fragment {
                     }
                      value = "for(int i = 0;i < " + numLoops + ";i++){";
                 }
-
+*/
                 if (fromColumn == 0 && toColumn == 0){
                     methodValuesLeft.add(toRow, value);
                     methodValuesLeft.remove(fromRow);
@@ -148,21 +147,14 @@ public class BoardFragment extends Fragment {
         }
     }
 
-    public static void initMethodValuesLeft(String[] values){
-        for (String value : values){
-            methodValuesLeft.add(value);
-        }
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Board");
 
-        addColumnList(0);
-        addColumnList(1);
-        //addEmptyColumnList();
+        addColumnList();
+        addEmptyColumnList();
     }
 
     @Override
@@ -190,7 +182,7 @@ public class BoardFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 return true;
             case R.id.action_add_column:
-                addColumnList(0);
+                addColumnList();
                 return true;
             case R.id.action_remove_column:
                 mBoardView.removeColumn(0);
@@ -201,8 +193,7 @@ public class BoardFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-private void addEmptyColumnList()
-{
+    private void addEmptyColumnList() {
     String [] arrayofmethods = {};
     for (int i = 0; i < arrayofmethods.length; i++) {
         long id = sCreatedItems++;
@@ -235,18 +226,11 @@ private void addEmptyColumnList()
     }
 
 }
-    private void addColumnList(int col) {
-        mItemArray.clear();
-        if (col == 0){
-            for (int i = 0; i < methodValuesLeft.size(); i++) {
-                long id = sCreatedItems++;
-                mItemArray.add(new Pair<>(id, methodValuesLeft.get(i)));
-            }
-        } else if (col == 1){
-            for (int i = 0; i < methodValuesRight.size(); i++) {
-                long id = sCreatedItems++;
-                mItemArray.add(new Pair<>(id, methodValuesRight.get(i)));
-            }
+    private void addColumnList() {
+        String [] arrayofmethods = GameActivity.generateLevelInformation(StageActivity.whichStage);
+        for (int i = 0; i < arrayofmethods.length; i++) {
+            long id = sCreatedItems++;
+            mItemArray.add(new Pair<>(id, arrayofmethods[i]));
         }
 
         final int column = mColumns;
