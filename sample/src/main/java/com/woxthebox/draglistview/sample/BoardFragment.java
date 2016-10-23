@@ -43,14 +43,14 @@ import com.woxthebox.draglistview.DragItem;
 import java.util.ArrayList;
 
 public class BoardFragment extends Fragment {
-    public ArrayList<Integer> numofSeconds = new ArrayList<Integer>();
 
     private static int sCreatedItems = 0;
     private BoardView mBoardView;
     private int mColumns;
     ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
     ArrayList<Pair<Long, String>> mItemArray2 = new ArrayList<>();
-    public static ArrayList<String> methodValues = new ArrayList<String>();
+    public static ArrayList<String> methodValuesRight = new ArrayList<String>();
+    public static ArrayList<String> methodValuesLeft = new ArrayList<String>();
 
     public static BoardFragment newInstance() {
         return new BoardFragment();
@@ -91,21 +91,47 @@ public class BoardFragment extends Fragment {
                 if (fromColumn != toColumn || fromRow != toRow) {
                     Toast.makeText(mBoardView.getContext(), "End - column: " + toColumn + " row: " + toRow, Toast.LENGTH_SHORT).show();
                 }
+                System.out.println("fuck to row " + toRow);
+                System.out.println("fuck from row " + fromRow);
+                System.out.println("fuck to col " + toColumn);
+                System.out.println("fuck from col " + fromColumn);
+                String value = "";
+
+                if (fromColumn == 0 && toColumn == 0){
+                    methodValuesLeft.add(toRow, methodValuesLeft.get(fromRow));
+                    methodValuesLeft.remove(fromRow);
+                } else if (fromColumn == 0 && toColumn == 1){
+                    methodValuesRight.add(toRow, methodValuesLeft.get(fromRow));
+                    methodValuesLeft.remove(fromRow);
+                } else if (fromColumn == 1 && toColumn == 0){
+                    methodValuesLeft.add(toRow, methodValuesRight.get(fromRow));
+                    methodValuesRight.remove(fromRow);
+                } else if (fromColumn == 1 && toColumn == 1){
+                    methodValuesRight.add(toRow, methodValuesRight.get(fromRow));
+                    methodValuesRight.remove(fromRow);
+                }
+                for (String val: methodValuesLeft){
+                    System.out.println("left " + val);
+                }
+                for (String val: methodValuesRight){
+                    System.out.println("right " + val);
+                }
+
+                
                 View v1 = LayoutInflater.from(BoardFragment.this.getContext()).inflate(R.layout.timedialog, null);
                 final EditText secondsText;
                 AlertDialog.Builder builder = new AlertDialog.Builder(BoardFragment.this.getContext());
-                builder.setMessage("Enter Number of Seconds");
+                builder.setMessage("How many times should we run this loop?");
                 builder.setView(v1);
                 AlertDialog alert = builder.create();
                 alert.show();
                 secondsText = (EditText) v1.findViewById(R.id.secondEditText);
-                int numSeconds;
+                int numLoops;
                 if (secondsText.getText().toString().equals("")) {
-                    numSeconds = 0;
+                    numLoops = 0;
                 }else{
-                    numSeconds = Integer.parseInt(secondsText.getText().toString());
+                    numLoops = Integer.parseInt(secondsText.getText().toString());
                 }
-                numofSeconds.add(numSeconds);
             }
         });
         return view;
@@ -187,13 +213,12 @@ private void addEmptyColumnList()
     mBoardView.addColumnList(listAdapter, header, false);
     mColumns++;
     for (Pair<Long, String> item : mItemArray2){
-        System.out.println("fuck " + item);
-        System.out.println("fuck " + item.second);
+        methodValuesRight.add(item.second);
     }
 
 }
     private void addColumnList() {
-        String [] arrayofmethods = {"move forward", "move backward", "move left", "move right"};
+        String [] arrayofmethods = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()"};
         for (int i = 0; i < arrayofmethods.length; i++) {
             long id = sCreatedItems++;
             mItemArray.add(new Pair<>(id, arrayofmethods[i]));
@@ -221,8 +246,7 @@ private void addEmptyColumnList()
         mBoardView.addColumnList(listAdapter, header, false);
         mColumns++;
         for (Pair<Long, String> item : mItemArray){
-            System.out.println("fuck " + item);
-            System.out.println("fuck " + item.second);
+            methodValuesLeft.add(item.second);
         }
     }
 

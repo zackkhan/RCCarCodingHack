@@ -53,6 +53,9 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("are we running3");
+                for (String stringData : BoardFragment.methodValuesRight){
+                    System.out.println("run " + stringData);
+                }
                 //BoardFragment.sendDataArduino();
 
             }
