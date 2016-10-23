@@ -55,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
     Button runButton;
 
 
-    public void connectService(){
+    /*public void connectService(){
         try {
             status.setText("Connecting...");
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -96,7 +96,7 @@ public class GameActivity extends AppCompatActivity {
                     break;
             }
         }
-    };
+    }; */
 
     public void readIn()
     {
@@ -161,8 +161,8 @@ else if (element.contains ("for{"))
         if (savedInstanceState == null) {
             showFragment(BoardFragment.newInstance());
         }
-        bt = new Bluetooth(this, mHandler);
-        connectService();
+    /*    bt = new Bluetooth(this, mHandler);
+        connectService();*/
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
         generateLevelInformation(StageActivity.whichStage);
@@ -219,7 +219,7 @@ else if (element.contains ("for{"))
         return super.onOptionsItemSelected(item);
     }
 
-    private static String [] generateLevelInformation(int whichStage) {
+    public static String [] generateLevelInformation(int whichStage) {
         Log.d("myTag", "Playing level " + whichStage);
 
         switch (whichStage) {
