@@ -45,6 +45,7 @@ import java.util.ArrayList;
 public class BoardFragment extends Fragment {
 
     private static int sCreatedItems = 0;
+    private static boolean ran = false;
     private BoardView mBoardView;
     private int mColumns;
     ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
@@ -148,7 +149,9 @@ public class BoardFragment extends Fragment {
     }
 
     public static void initMethodValuesLeft(String[] values){
-
+        for (String value : values){
+            methodValuesLeft.add(value);
+        }
     }
 
     @Override
@@ -158,7 +161,8 @@ public class BoardFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Board");
 
         addColumnList(0);
-        addEmptyColumnList();
+        addColumnList(1);
+        //addEmptyColumnList();
     }
 
     @Override
@@ -232,6 +236,7 @@ private void addEmptyColumnList()
 
 }
     private void addColumnList(int col) {
+        mItemArray.clear();
         if (col == 0){
             for (int i = 0; i < methodValuesLeft.size(); i++) {
                 long id = sCreatedItems++;

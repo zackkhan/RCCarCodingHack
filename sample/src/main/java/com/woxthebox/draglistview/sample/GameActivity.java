@@ -107,9 +107,9 @@ public class GameActivity extends AppCompatActivity {
             case 1:
                 stageTextString = "Stage 1";
                 descriptionTextString = "For this stage, move the car forwards five times. Be careful, you only have one move() block!";
-                BoardFragment.initMethodValuesLeft({"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"});
+                String[] methodValues = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"};
+                BoardFragment.initMethodValuesLeft(methodValues);
                 break;
         }
     }
-}
 }
