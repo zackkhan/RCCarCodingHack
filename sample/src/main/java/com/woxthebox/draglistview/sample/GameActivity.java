@@ -21,10 +21,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
+
+    TextView stageText;
+    TextView descriptionText;
+    String stageTextString = "";
+    String descriptionTextString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
+        generateLevelInformation(StageActivity.whichStage);
+        /*stageText = (TextView) findViewById(R.id.text_stage_number);
+        descriptionText = (TextView) findViewById(R.id.text_stage_directions);
+        stageText.setText(stageTextString);
+        descriptionText.setText(descriptionTextString);*/
     }
 
     private void showFragment(Fragment fragment) {
@@ -70,5 +82,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void generateLevelInformation(int whichStage){
+        Log.d("myTag", "Playing level " + whichStage);
+        switch (whichStage){
+            case 1:
+                stageTextString = "Stage 1";
+                descriptionTextString = "For this stage, move the car forwards five times. Be careful, you only have one move() block!";
+                break;
+        }
     }
 }

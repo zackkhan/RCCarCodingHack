@@ -16,4 +16,5 @@
 <resources>
     <color name="list_item_background">#AACCCCCC</color>
     <color name="app_color">#8EAE3C</color>
+    <color name="wallpaper">#e6ffff</color>
 </resources>
