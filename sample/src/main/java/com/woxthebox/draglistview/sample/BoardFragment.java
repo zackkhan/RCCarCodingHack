@@ -117,7 +117,7 @@ public class BoardFragment extends Fragment {
                     System.out.println("right " + val);
                 }
 
-                
+
                 View v1 = LayoutInflater.from(BoardFragment.this.getContext()).inflate(R.layout.timedialog, null);
                 final EditText secondsText;
                 AlertDialog.Builder builder = new AlertDialog.Builder(BoardFragment.this.getContext());
