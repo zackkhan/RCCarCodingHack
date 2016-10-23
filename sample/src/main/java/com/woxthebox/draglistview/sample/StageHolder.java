@@ -7,6 +7,7 @@ package com.woxthebox.draglistview.sample;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.DecorContentParent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class StageHolder extends RecyclerView.Adapter<StageHolder.ViewHolder> {
                 Context mContext = view.getContext();
                 StageActivity.whichStage = position + 1;
                 Log.d("myTag", StageActivity.whichStage + "");
-                Intent go = new Intent(mContext, GameActivity.class);
+                Intent go = new Intent(mContext, DescriptionActivity.class);
                 mContext.startActivity(go);
             }
         });

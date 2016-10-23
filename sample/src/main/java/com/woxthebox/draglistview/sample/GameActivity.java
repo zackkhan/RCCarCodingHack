@@ -53,8 +53,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("are we running3");
+                //evaluate if methods are compilable here
+
                 for (String stringData : BoardFragment.methodValuesRight) {
                     System.out.println("run " + stringData);
+                    //evaluate each block, if it is an action block
                 }
                 //BoardFragment.sendDataArduino();
 
@@ -113,3 +116,6 @@ public class GameActivity extends AppCompatActivity {
         return new String[0];
     }
 }
+
+//if (true) {
+//if (false) {
