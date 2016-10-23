@@ -240,7 +240,7 @@ else if (element.contains ("for{"))
             case 2:
                 stageTextString = "Stage 2" ;
                 descriptionTextString = "Move the car forward twice, and then turn left!";
-                String [] methodValues2 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();"};
+                String [] methodValues2 = {"stepForward();", "stepForward();","stepBackward();", "turnLeft();", "turnRight();"};
                 return methodValues2;
 
             case 3:
@@ -256,8 +256,8 @@ else if (element.contains ("for{"))
 
             case 5:
                 stageTextString = "Stage 5";
-                descriptionTextString = "Move the car forwards 4 times, then move left 4 times. Be careful, you only have one two move blocks!";
-                String [] methodValues5 = {"stepForward();", "turnLeft();", "for(i=0; i<4; i++", "for(i=0; i<4; i++" };
+                descriptionTextString = "Move the car forwards 5 times, then move left 4 times. Be careful, you only have one two move blocks!";
+                String [] methodValues5 = {"stepForward();", "turnLeft();", "for(i=0; i<5; i++", "for(i=0; i<4; i++" };
                 return methodValues5;
 
 
