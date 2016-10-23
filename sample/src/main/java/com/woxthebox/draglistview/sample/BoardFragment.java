@@ -92,6 +92,8 @@ public class BoardFragment extends Fragment {
                 if (fromColumn != toColumn || fromRow != toRow) {
                     Toast.makeText(mBoardView.getContext(), "End - column: " + toColumn + " row: " + toRow, Toast.LENGTH_SHORT).show();
                 }
+                //something to grab the item that was just added. if it is a for, then recreate the method
+
                 System.out.println("fuck to row " + toRow);
                 System.out.println("fuck from row " + fromRow);
                 System.out.println("fuck to col " + toColumn);

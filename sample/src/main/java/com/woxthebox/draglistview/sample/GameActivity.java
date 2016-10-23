@@ -29,13 +29,129 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GameActivity extends AppCompatActivity {
+import android.bluetooth.BluetoothAdapter;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
+public class GameActivity extends AppCompatActivity {
+    public final String TAG = "Main";
+
+    private SeekBar elevation;
+    private TextView debug;
+    private TextView status;
+    private Bluetooth bt;
     TextView stageText;
     TextView descriptionText;
     String stageTextString = "";
     String descriptionTextString = "";
     Button runButton;
+
+
+    public void connectService(){
+        try {
+            status.setText("Connecting...");
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (bluetoothAdapter.isEnabled()) {
+                bt.start();
+                bt.connectDevice("HC-06");
+                Log.d(TAG, "Btservice started - listening");
+                status.setText("Connected");
+            } else {
+                Log.w(TAG, "Btservice started - bluetooth is not enabled");
+                status.setText("Bluetooth Not enabled");
+            }
+        } catch(Exception e){
+            Log.e(TAG, "Unable to start bt ",e);
+            status.setText("Unable to connect " +e);
+        }
+    }
+
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Bluetooth.MESSAGE_STATE_CHANGE:
+                    Log.d(TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
+                    break;
+                case Bluetooth.MESSAGE_WRITE:
+                    Log.d(TAG, "MESSAGE_WRITE ");
+                    break;
+                case Bluetooth.MESSAGE_READ:
+                    Log.d(TAG, "MESSAGE_READ ");
+                    break;
+                case Bluetooth.MESSAGE_DEVICE_NAME:
+                    Log.d(TAG, "MESSAGE_DEVICE_NAME "+msg);
+                    break;
+                case Bluetooth.MESSAGE_TOAST:
+                    Log.d(TAG, "MESSAGE_TOAST "+msg);
+                    break;
+            }
+        }
+    };
+
+    public void readIn()
+    {
+        for (String element: BoardFragment.methodValuesRight)
+        {
+if (element.contains("Forward()"))
+    stepForward();
+ else if (element.contains("Backward()"))
+     stepBackward();
+ else  if (element.contains("Left()"))
+       turnLeft();
+ else if (element.contains("Right()"))
+     turnRight();
+else if (element.contains ("for{"))
+{
+    String Loops = element.substring(element.indexOf('<'), element.indexOf(';'));
+    int numofLoops = Integer.parseInt(Loops);
+    String nextelement = BoardFragment.methodValuesRight.get(BoardFragment.methodValuesRight.indexOf(element));
+    for (int i =0; i<5; i++)
+    {
+      readIn(nextelement);
+    }
+//"for(int i = 0;i < 5;i++){"
+
+        }
+
+    }}
+
+    private void executeForLoop() {
+        int numofloops;
+    }
+    private void stepForward() {
+        bt.sendMessage("1");
+    }
+    private void stepBackward()
+    {
+
+    }
+    private void turnLeft() {
+    }
+    private void turnRight()
+    {
+
+    }
+    public void readIn(String s)
+    {
+        if (s.contains("Forward()"))
+            stepForward();
+        else if (s.contains("Backward()"))
+            stepBackward();
+        else  if (s.contains("Left()"))
+            turnLeft();
+        else if (s.contains("Right()"))
+            turnRight();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +161,8 @@ public class GameActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             showFragment(BoardFragment.newInstance());
         }
+        bt = new Bluetooth(this, mHandler);
+        connectService();
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
         generateLevelInformation(StageActivity.whichStage);
@@ -56,6 +174,7 @@ public class GameActivity extends AppCompatActivity {
                 for (String stringData : BoardFragment.methodValuesRight) {
                     System.out.println("run " + stringData);
                 }
+                readIn();
                 //BoardFragment.sendDataArduino();
 
             }
@@ -106,10 +225,51 @@ public class GameActivity extends AppCompatActivity {
         switch (whichStage) {
             case 1:
                 stageTextString = "Stage 1";
-                descriptionTextString = "For this stage, move the car forwards five times. Be careful, you only have one move() block!";
-                String[] methodValues = {"stepForward()", "stepBackward()", "turnLeft()", "turnRight()", "for(){", "}"};
+                descriptionTextString = "Move the car forwards once!";
+                String [] methodValues = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();"};
                 BoardFragment.initMethodValuesLeft(methodValues);
                 break;
+
+            case 2:
+                stageTextString = "Stage 2" ;
+                descriptionTextString = "Move the car forward twice, and then turn left!";
+                String [] methodValues2 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();"};
+                BoardFragment.initMethodValuesLeft(methodValues2);
+                break;
+
+            case 3:
+                stageTextString = "Stage 3";
+                descriptionTextString = "Move the car forwards five times. Be careful, you only have one move() block!";
+                String [] methodValues3 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight(); for(i=0; i<5; i++"};
+                BoardFragment.initMethodValuesLeft(methodValues3);
+                break;
+            case 4:
+                stageTextString = "Stage 4";
+                descriptionTextString = "Move the car forwards 4 times, then move left 4 times. Be careful, you only have one two move blocks!";
+                String [] methodValues4 = {"stepForward();", "turnLeft();", "for(i=0; i<4; i++", "for(i=0; i<4; i++" };
+                BoardFragment.initMethodValuesLeft(methodValues4);
+                break;
+            case 5:
+                stageTextString = "Stage 5";
+                descriptionTextString = "Move the car forwards 4 times, then move left 4 times. Be careful, you only have one two move blocks!";
+                String [] methodValues5 = {"stepForward();", "turnLeft();", "for(i=0; i<4; i++", "for(i=0; i<4; i++" };
+                BoardFragment.initMethodValuesLeft(methodValues5);
+                break;
+
+
+            case 6:
+                stageTextString = "Stage 6" ;
+                descriptionTextString = "Move the car in a square, making four steps for each side of the square";
+                String [] methodValues6 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight(); for(i=0; i<4; i++",
+                "for(i=0; i<4; i++"}; //needs a nested for loop lol
+
+                BoardFragment.initMethodValuesLeft(methodValues6);
+
+
+
+
+
         }
     }
 }
+
