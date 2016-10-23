@@ -139,18 +139,17 @@ public class BoardFragment extends Fragment {
 private void addEmptyColumnList()
 {
     String [] arrayofmethods = {};
-    final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
-    int addItems = 15;
+    final ArrayList<Pair<Long, String>> mItemArray2 = new ArrayList<>();
     for (int i = 0; i < arrayofmethods.length; i++) {
         long id = sCreatedItems++;
-        mItemArray.add(new Pair<>(id, arrayofmethods[i]));
+        mItemArray2.add(new Pair<>(id, arrayofmethods[i]));
     }
 
     final int column = mColumns;
-    final ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.column_item, R.id.item_layout, true);
+    final ItemAdapter listAdapter = new ItemAdapter(mItemArray2, R.layout.column_item, R.id.item_layout, true);
     final View header = View.inflate(getActivity(), R.layout.column_header, null);
     ((TextView) header.findViewById(R.id.text)).setText("Your Program");
-    ((TextView) header.findViewById(R.id.item_count)).setText("" + addItems);
+    ((TextView) header.findViewById(R.id.item_count)).setText("" + mItemArray2.size());
     header.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -161,7 +160,7 @@ private void addEmptyColumnList()
             //mBoardView.removeItem(column, 0);
             //mBoardView.moveItem(0, 0, 1, 3, false);
             //mBoardView.replaceItem(0, 0, item1, true);
-            ((TextView) header.findViewById(R.id.item_count)).setText("" + mItemArray.size());
+            ((TextView) header.findViewById(R.id.item_count)).setText("" + mItemArray2.size());
         }
     });
 
@@ -172,7 +171,6 @@ private void addEmptyColumnList()
     private void addColumnList() {
         String [] arrayofmethods = {"move forward", "move backward", "move left", "move right"};
         final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
-        int addItems = 15;
         for (int i = 0; i < arrayofmethods.length; i++) {
             long id = sCreatedItems++;
             mItemArray.add(new Pair<>(id, arrayofmethods[i]));
@@ -182,7 +180,7 @@ private void addEmptyColumnList()
         final ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.column_item, R.id.item_layout, true);
         final View header = View.inflate(getActivity(), R.layout.column_header, null);
         ((TextView) header.findViewById(R.id.text)).setText("Methods");
-        ((TextView) header.findViewById(R.id.item_count)).setText("" + addItems);
+        ((TextView) header.findViewById(R.id.item_count)).setText("" + mItemArray.size());
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

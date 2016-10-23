@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <color name="list_item_background">#AACCCCCC</color>
-    <color name="app_color">#8EAE3C</color>
+    <color name="list_item_background">#e6ffff</color>
+    <color name="app_color">#80ffff</color>
     <color name="wallpaper">#e6ffff</color>
 </resources>
