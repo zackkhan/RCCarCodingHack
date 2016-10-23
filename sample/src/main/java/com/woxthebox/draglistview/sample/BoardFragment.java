@@ -17,6 +17,7 @@
 package com.woxthebox.draglistview.sample;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,10 +43,14 @@ import com.woxthebox.draglistview.DragItem;
 import java.util.ArrayList;
 
 public class BoardFragment extends Fragment {
+    public ArrayList<Integer> numofSeconds = new ArrayList<Integer>();
 
     private static int sCreatedItems = 0;
     private BoardView mBoardView;
     private int mColumns;
+    ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
+    ArrayList<Pair<Long, String>> mItemArray2 = new ArrayList<>();
+    public static ArrayList<String> methodValues = new ArrayList<String>();
 
     public static BoardFragment newInstance() {
         return new BoardFragment();
@@ -85,6 +91,21 @@ public class BoardFragment extends Fragment {
                 if (fromColumn != toColumn || fromRow != toRow) {
                     Toast.makeText(mBoardView.getContext(), "End - column: " + toColumn + " row: " + toRow, Toast.LENGTH_SHORT).show();
                 }
+                View v1 = LayoutInflater.from(BoardFragment.this.getContext()).inflate(R.layout.timedialog, null);
+                final EditText secondsText;
+                AlertDialog.Builder builder = new AlertDialog.Builder(BoardFragment.this.getContext());
+                builder.setMessage("Enter Number of Seconds");
+                builder.setView(v1);
+                AlertDialog alert = builder.create();
+                alert.show();
+                secondsText = (EditText) v1.findViewById(R.id.secondEditText);
+                int numSeconds;
+                if (secondsText.getText().toString().equals("")) {
+                    numSeconds = 0;
+                }else{
+                    numSeconds = Integer.parseInt(secondsText.getText().toString());
+                }
+                numofSeconds.add(numSeconds);
             }
         });
         return view;
@@ -139,7 +160,6 @@ public class BoardFragment extends Fragment {
 private void addEmptyColumnList()
 {
     String [] arrayofmethods = {};
-    final ArrayList<Pair<Long, String>> mItemArray2 = new ArrayList<>();
     for (int i = 0; i < arrayofmethods.length; i++) {
         long id = sCreatedItems++;
         mItemArray2.add(new Pair<>(id, arrayofmethods[i]));
@@ -166,11 +186,14 @@ private void addEmptyColumnList()
 
     mBoardView.addColumnList(listAdapter, header, false);
     mColumns++;
+    for (Pair<Long, String> item : mItemArray2){
+        System.out.println("fuck " + item);
+        System.out.println("fuck " + item.second);
+    }
 
 }
     private void addColumnList() {
         String [] arrayofmethods = {"move forward", "move backward", "move left", "move right"};
-        final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
         for (int i = 0; i < arrayofmethods.length; i++) {
             long id = sCreatedItems++;
             mItemArray.add(new Pair<>(id, arrayofmethods[i]));
@@ -197,6 +220,10 @@ private void addEmptyColumnList()
 
         mBoardView.addColumnList(listAdapter, header, false);
         mColumns++;
+        for (Pair<Long, String> item : mItemArray){
+            System.out.println("fuck " + item);
+            System.out.println("fuck " + item.second);
+        }
     }
 
     private static class MyDragItem extends DragItem {

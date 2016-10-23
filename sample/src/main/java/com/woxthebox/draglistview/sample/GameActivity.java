@@ -16,6 +16,7 @@
 
 package com.woxthebox.draglistview.sample;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
@@ -32,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
     TextView descriptionText;
     String stageTextString = "";
     String descriptionTextString = "";
+    Button runButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,15 @@ public class GameActivity extends AppCompatActivity {
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
         generateLevelInformation(StageActivity.whichStage);
+        runButton = (Button) findViewById(R.id.runButton);
+        runButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("are we running3");
+                //BoardFragment.sendDataArduino();
+
+            }
+        });
         /*stageText = (TextView) findViewById(R.id.text_stage_number);
         descriptionText = (TextView) findViewById(R.id.text_stage_directions);
         stageText.setText(stageTextString);
