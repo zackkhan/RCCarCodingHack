@@ -50,8 +50,8 @@ public class GameActivity extends AppCompatActivity {
     private Bluetooth bt;
     TextView stageText;
     TextView descriptionText;
-    String stageTextString = "";
-    String descriptionTextString = "";
+  public static String stageTextString = "";
+    public static String descriptionTextString = "";
     Button runButton;
 
 
@@ -219,7 +219,7 @@ else if (element.contains ("for{"))
         return super.onOptionsItemSelected(item);
     }
 
-    private void generateLevelInformation(int whichStage) {
+    private static String [] generateLevelInformation(int whichStage) {
         Log.d("myTag", "Playing level " + whichStage);
 
         switch (whichStage) {
@@ -227,34 +227,31 @@ else if (element.contains ("for{"))
                 stageTextString = "Stage 1";
                 descriptionTextString = "Move the car forwards once!";
                 String [] methodValues = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();"};
-                BoardFragment.initMethodValuesLeft(methodValues);
-                break;
+                return methodValues;
 
             case 2:
                 stageTextString = "Stage 2" ;
                 descriptionTextString = "Move the car forward twice, and then turn left!";
                 String [] methodValues2 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();"};
-                BoardFragment.initMethodValuesLeft(methodValues2);
-                break;
+                return methodValues2;
 
             case 3:
                 stageTextString = "Stage 3";
                 descriptionTextString = "Move the car forwards five times. Be careful, you only have one move() block!";
                 String [] methodValues3 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight(); for(i=0; i<5; i++"};
-                BoardFragment.initMethodValuesLeft(methodValues3);
-                break;
+                return methodValues3;
             case 4:
                 stageTextString = "Stage 4";
                 descriptionTextString = "Move the car forwards 4 times, then move left 4 times. Be careful, you only have one two move blocks!";
                 String [] methodValues4 = {"stepForward();", "turnLeft();", "for(i=0; i<4; i++", "for(i=0; i<4; i++" };
-                BoardFragment.initMethodValuesLeft(methodValues4);
-                break;
+                return methodValues4;
+
             case 5:
                 stageTextString = "Stage 5";
                 descriptionTextString = "Move the car forwards 4 times, then move left 4 times. Be careful, you only have one two move blocks!";
                 String [] methodValues5 = {"stepForward();", "turnLeft();", "for(i=0; i<4; i++", "for(i=0; i<4; i++" };
-                BoardFragment.initMethodValuesLeft(methodValues5);
-                break;
+                return methodValues5;
+
 
 
             case 6:
@@ -263,13 +260,14 @@ else if (element.contains ("for{"))
                 String [] methodValues6 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight(); for(i=0; i<4; i++",
                 "for(i=0; i<4; i++"}; //needs a nested for loop lol
 
-                BoardFragment.initMethodValuesLeft(methodValues6);
+                return methodValues6;
 
 
 
 
 
         }
+        return new String[0];
     }
 }
 
