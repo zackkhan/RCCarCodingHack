@@ -14,7 +14,7 @@
 -->
 <resources>
 
-    <string name="app_name">DragListView</string>
+    <string name="app_name">Code RC Car</string>
     <string name="action_lists">Test lists</string>
     <string name="action_board">Test board </string>
     <string name="action_disable_drag">Disable drag</string>

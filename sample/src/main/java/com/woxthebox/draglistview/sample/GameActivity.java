@@ -298,77 +298,77 @@ else
         return true;
 
             case 2:
-                correctAnswer.clear();
-                correctAnswer.add("stepForward();");
-                correctAnswer.add ("stepForward();");
-                correctAnswer.add ("turnLeft();");
+                ArrayList<String> correctAnswer2 = new ArrayList<String>();
+                correctAnswer2.add("stepForward();");
+                correctAnswer2.add ("stepForward();");
+                correctAnswer2.add ("turnLeft();");
 
-                if (correctAnswer.equals(BoardFragment.methodValuesRight)) {
+               if (correctAnswer2.equals(BoardFragment.methodValuesRight)) {
                     Toast.makeText(GameActivity.this, "You are correct! Great job!", Toast.LENGTH_LONG).show();
                     bt.sendMessage("2");
-                }
-                else
-                    Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+               }
+               else
+                   Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
 
             case 3:
-                correctAnswer.clear();
-                correctAnswer.add("for(i=0; i<5; i++){");
-                correctAnswer.add ("stepForward();");
-                correctAnswer.add("}");
+                ArrayList<String> correctAnswer3 = new ArrayList<String>();
+                correctAnswer3.add("for(i=0; i<5; i++){");
+                correctAnswer3.add ("stepForward();");
+                correctAnswer3.add("}");
 
-              //  if (correctAnswer.equals(BoardFragment.methodValuesRight))
-               // {
+       //       if (correctAnswer3.equals(BoardFragment.methodValuesRight))
+       //         {
                     bt.sendMessage("3");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-               // }
-              //  else
-               //     Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+      //          }
+      //        else
+        //           Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
             case 4:
-                correctAnswer.clear();
-                correctAnswer.add("for(i=0; i<5; i++){");
-                correctAnswer.add ("stepForward();");
-                correctAnswer.add("for(i=0; i<4; i++){");
-                correctAnswer.add ("stepBackward();");
-                correctAnswer.add("}");
-                correctAnswer.add("}");
+                ArrayList<String> correctAnswer4 = new ArrayList<String>();
+                correctAnswer4.add("for(i=0; i<5; i++){");
+                correctAnswer4.add ("stepForward();");
+                correctAnswer4.add("for(i=0; i<4; i++){");
+                correctAnswer4.add ("stepBackward();");
+                correctAnswer4.add("}");
+                correctAnswer4.add("}");
 
-              //  if (correctAnswer.equals(BoardFragment.methodValuesRight))
-              //  {
+           //    if (correctAnswer4.equals(BoardFragment.methodValuesRight))
+           //    {
                     bt.sendMessage("4");
-                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-             //   }
-              //  else
-              //      Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+                   Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
+          //      }
+             //   else
+              //     Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
             case 5:
-                correctAnswer.clear();
-                correctAnswer.add("for(i=0; i<5; i++){");
-                correctAnswer.add ("stepForward();");
-                correctAnswer.add("for(i=0; i<2; i++){");
-                correctAnswer.add ("stepBackward();");
-                correctAnswer.add("turnLeft();");
-                correctAnswer.add("}");
-                correctAnswer.add("}");
+                ArrayList<String> correctAnswer5 = new ArrayList<String>();
+                correctAnswer5.add("for(i=0; i<5; i++){");
+                correctAnswer5.add ("stepForward();");
+                correctAnswer5.add("for(i=0; i<2; i++){");
+                correctAnswer5.add ("stepBackward();");
+                correctAnswer5.add("turnLeft();");
+                correctAnswer5.add("}");
+                correctAnswer5.add("}");
 
-               // if (correctAnswer.equals(BoardFragment.methodValuesRight))
-                //{
+              // if (correctAnswer5.equals(BoardFragment.methodValuesRight))
+               // {
                     bt.sendMessage("5");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-            //    }
-            //    else
-             //       Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+             // }
+             //   else
+              //      Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
 
-            case 0:
-                correctAnswer.clear();
-                correctAnswer.add("for(i=0; i<2; i++){");
-                correctAnswer.add("for(i=0; i<3; i++){");
-                correctAnswer.add ("stepForward();");
-                correctAnswer.add("turnRight();");
-                correctAnswer.add("}");
-                correctAnswer.add("}");
+            case 6:
+                ArrayList<String> correctAnswer6 = new ArrayList<String>();
+                correctAnswer6.add("for(i=0; i<2; i++){");
+                correctAnswer6.add("for(i=0; i<3; i++){");
+                correctAnswer6.add ("stepForward();");
+                correctAnswer6.add("turnRight();");
+                correctAnswer6.add("}");
+                correctAnswer6.add("}");
 
 
-              //  if (correctAnswer.equals(BoardFragment.methodValuesRight))
-              //  {
+              if (correctAnswer6.equals(BoardFragment.methodValuesRight))
+               {
                     bt.sendMessage("6");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
               //  }
@@ -381,11 +381,12 @@ else
 
 
 
-        return false;
+
     }
 
 
+        return false;
 
-
+}
 }
 
