@@ -316,29 +316,29 @@ else
                 correctAnswer3.add ("stepForward();");
                 correctAnswer3.add("}");
 
-       //       if (correctAnswer3.equals(BoardFragment.methodValuesRight))
-       //         {
+         if (correctAnswer3.equals(BoardFragment.methodValuesRight))
+            {
                     bt.sendMessage("3");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-      //          }
-      //        else
-        //           Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+             }
+         else
+                  Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
             case 4:
                 ArrayList<String> correctAnswer4 = new ArrayList<String>();
-                correctAnswer4.add("for(i=0; i<5; i++){");
+                correctAnswer4.add("for(i=0; i<4; i++){");
                 correctAnswer4.add ("stepForward();");
                 correctAnswer4.add("for(i=0; i<4; i++){");
                 correctAnswer4.add ("stepBackward();");
                 correctAnswer4.add("}");
                 correctAnswer4.add("}");
 
-           //    if (correctAnswer4.equals(BoardFragment.methodValuesRight))
-           //    {
+              if (correctAnswer4.equals(BoardFragment.methodValuesRight))
+              {
                     bt.sendMessage("4");
                    Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-          //      }
-             //   else
-              //     Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+               }
+               else
+                  Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
             case 5:
                 ArrayList<String> correctAnswer5 = new ArrayList<String>();
                 correctAnswer5.add("for(i=0; i<5; i++){");
@@ -349,13 +349,13 @@ else
                 correctAnswer5.add("}");
                 correctAnswer5.add("}");
 
-              // if (correctAnswer5.equals(BoardFragment.methodValuesRight))
-               // {
+              if (correctAnswer5.equals(BoardFragment.methodValuesRight))
+                {
                     bt.sendMessage("5");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-             // }
-             //   else
-              //      Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+              }
+               else
+                   Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
 
             case 6:
                 ArrayList<String> correctAnswer6 = new ArrayList<String>();
@@ -371,22 +371,22 @@ else
                {
                     bt.sendMessage("6");
                     Toast.makeText(GameActivity.this,"You are correct! Great job!", Toast.LENGTH_LONG).show();
-              //  }
-              //  else
-              //      Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
+                }
+               else
+                   Toast.makeText(GameActivity.this,"You are incorrect! Please try again!", Toast.LENGTH_LONG).show();
 
         }
 
 
 
 
-
+        return false;
 
     }
 
 
-        return false;
+
 
 }
-}
+
 
