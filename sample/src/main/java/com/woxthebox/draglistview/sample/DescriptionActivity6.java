@@ -12,7 +12,7 @@ public class DescriptionActivity6 extends AppCompatActivity {
     Button nextButton;
     TextView textDescription;
     TextView textStage;
-
+    static TextView tutorial1Text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,5 +30,7 @@ public class DescriptionActivity6 extends AppCompatActivity {
         });
         textDescription.setText("Move the car in a zig zag, making it go forward and right three times");
         textStage.setText("Stage 6");
+        tutorial1Text = (TextView) findViewById(R.id.tutorial1Text);
+        tutorial1Text.setText("Remember, you can put more than one method within a For Loop! Good Luck!");
     }
 }

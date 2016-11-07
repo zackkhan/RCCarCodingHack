@@ -51,6 +51,7 @@ public class BoardFragment extends Fragment {
     ArrayList<Pair<Long, String>> mItemArray2 = new ArrayList<>();
     public static ArrayList<String> methodValuesRight = new ArrayList<String>();
     public static ArrayList<String> methodValuesLeft = new ArrayList<String>();
+    public static  ArrayList<String> ogMethods = new ArrayList<String>();
 
     public static BoardFragment newInstance() {
         return new BoardFragment();
@@ -74,7 +75,7 @@ public class BoardFragment extends Fragment {
         mBoardView.setBoardListener(new BoardView.BoardListener() {
             @Override
             public void onItemDragStarted(int column, int row) {
-                Toast.makeText(mBoardView.getContext(), "Start - column: " + column + " row: " + row, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(mBoardView.getContext(), "Start - column: " + column + " row: " + row, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -89,14 +90,14 @@ public class BoardFragment extends Fragment {
             @Override
             public void onItemDragEnded(int fromColumn, int fromRow, int toColumn, int toRow) {
                 if (fromColumn != toColumn || fromRow != toRow) {
-                    Toast.makeText(mBoardView.getContext(), "End - column: " + toColumn + " row: " + toRow, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(mBoardView.getContext(), "End - column: " + toColumn + " row: " + toRow, Toast.LENGTH_SHORT).show();
                 }
                 //something to grab the item that was just added. if it is a for, then recreate the method
 
-                System.out.println("fuck to row " + toRow);
-                System.out.println("fuck from row " + fromRow);
-                System.out.println("fuck to col " + toColumn);
-                System.out.println("fuck from col " + fromColumn);
+                System.out.println("to row " + toRow);
+                System.out.println("from row " + fromRow);
+                System.out.println("to col " + toColumn);
+                System.out.println("from col " + fromColumn);
                 String value = getValue(fromColumn, fromRow);
 
                 /*if (value.equals("for(){")) {
@@ -157,6 +158,8 @@ public class BoardFragment extends Fragment {
 
         addColumnList();
         addEmptyColumnList();
+        if (ogMethods == null)
+        ogMethods = methodValuesLeft;
     }
 
     @Override

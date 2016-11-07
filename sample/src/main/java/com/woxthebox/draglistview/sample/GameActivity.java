@@ -23,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,7 @@ public class GameActivity extends AppCompatActivity {
     private Bluetooth bt;
     TextView stageText;
     TextView descriptionText;
+   // ArrayList<String> ogVals = BoardFragment.methodValuesLeft;
   public static String stageTextString = "";
     public static String descriptionTextString = "";
     Button runButton;
@@ -188,6 +190,7 @@ else if (element.contains ("for{"))
                 }
 
                 isCorrect();
+
                 //BoardFragment.sendDataArduino();
 
             }
@@ -240,6 +243,7 @@ else if (element.contains ("for{"))
                 stageTextString = "Stage 1";
                 descriptionTextString = "Move the car forwards once!";
                 String [] methodValues = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();"};
+
                 return methodValues;
 
             case 2:
@@ -262,7 +266,7 @@ else if (element.contains ("for{"))
             case 5:
                 stageTextString = "Stage 5";
                 descriptionTextString = "Move the car forwards 5 times, then two times backwards, then left once. Be careful, you only have one two move blocks!";
-                String [] methodValues5 = {"stepForward();", "turnLeft();", "stepForward();", "for(i=0; i<5; i++){", "for(i=0; i<2; i++){", "}", "}"};
+                String [] methodValues5 = {"stepForward();", "turnLeft();", "stepBackward();", "for(i=0; i<5; i++){", "for(i=0; i<2; i++){", "}", "}"};
                 return methodValues5;
 
 
@@ -271,12 +275,8 @@ else if (element.contains ("for{"))
                 stageTextString = "Stage 6" ;
                 descriptionTextString = "Move the car in a zig zag, making it go forward and right three times";
                 String [] methodValues6 = {"stepForward();", "stepBackward();", "turnLeft();", "turnRight();", "for(i=0; i<3; i++)", "}",
-                "for(i=0; i<2; i++){", "}" }; //needs a nested for loop lol
+                  }; //needs a nested for loop lol
                 return methodValues6;
-
-
-
-
 
         }
         return new String[0];
@@ -327,9 +327,9 @@ else
                 ArrayList<String> correctAnswer4 = new ArrayList<String>();
                 correctAnswer4.add("for(i=0; i<4; i++){");
                 correctAnswer4.add ("stepForward();");
+                correctAnswer4.add("}");
                 correctAnswer4.add("for(i=0; i<4; i++){");
                 correctAnswer4.add ("stepBackward();");
-                correctAnswer4.add("}");
                 correctAnswer4.add("}");
 
               if (correctAnswer4.equals(BoardFragment.methodValuesRight))
@@ -343,11 +343,13 @@ else
                 ArrayList<String> correctAnswer5 = new ArrayList<String>();
                 correctAnswer5.add("for(i=0; i<5; i++){");
                 correctAnswer5.add ("stepForward();");
+                correctAnswer5.add("}");
                 correctAnswer5.add("for(i=0; i<2; i++){");
                 correctAnswer5.add ("stepBackward();");
+                correctAnswer5.add("}");
                 correctAnswer5.add("turnLeft();");
-                correctAnswer5.add("}");
-                correctAnswer5.add("}");
+
+
 
               if (correctAnswer5.equals(BoardFragment.methodValuesRight))
                 {
@@ -359,11 +361,11 @@ else
 
             case 6:
                 ArrayList<String> correctAnswer6 = new ArrayList<String>();
-                correctAnswer6.add("for(i=0; i<2; i++){");
+               // correctAnswer6.add("for(i=0; i<2; i++){");
                 correctAnswer6.add("for(i=0; i<3; i++){");
                 correctAnswer6.add ("stepForward();");
                 correctAnswer6.add("turnRight();");
-                correctAnswer6.add("}");
+              //  correctAnswer6.add("}");
                 correctAnswer6.add("}");
 
 
@@ -384,7 +386,42 @@ else
 
     }
 
+    public void clearLeft()
+    {
+        BoardFragment.methodValuesLeft = BoardFragment.ogMethods;
+// BoardFragment.methodValuesLeft = ogVals;
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            Log.d("CDA", "onKeyDown Called");
+            onBackPressed();
+           // clearLeft();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Log.d("CDA", "Right Vals" + BoardFragment.methodValuesRight.toString());
+        Log.d("CDA", "OG Vals" + BoardFragment.ogMethods.toString());
+        BoardFragment.methodValuesRight.clear();
+        try {
+            finalize();
+            clearLeft();
+
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } {
+
+        }
+        Intent setIntent = new Intent(GameActivity.this, StageActivity.class);
+        startActivity(setIntent);
+
+        return;
+    }
 
 
 }

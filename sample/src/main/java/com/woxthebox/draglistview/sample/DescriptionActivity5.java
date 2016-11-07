@@ -12,7 +12,7 @@ public class DescriptionActivity5 extends AppCompatActivity {
     Button nextButton;
     TextView textDescription;
     TextView textStage;
-
+    static TextView tutorial1Text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,11 @@ public class DescriptionActivity5 extends AppCompatActivity {
                 startActivity(go);
             }
         });
-        textDescription.setText("Move the car forwards 5 times, then two times backwards, then left once. Be careful, you only have one two move blocks!");
+        textDescription.setText("Move the car forwards 5 times, then two times backwards, then left once. You can only use three move blocks!");
         textStage.setText("Stage 5");
+        tutorial1Text = (TextView) findViewById(R.id.tutorial1Text);
+        tutorial1Text.setText("Pay attention to each For Loop, they are different this time! For example, for(i=0; i<2; i++)" +
+                " will run each method inside the brackets twice. The numbers are important! Also, dont forget that you can also still" +
+                "have methods in your program that are outside the For Loops. Good Luck!");
     }
 }

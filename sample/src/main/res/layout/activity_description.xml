@@ -11,17 +11,6 @@
     android:background="@color/wallpaper"
     tools:context="com.woxthebox.draglistview.sample.DescriptionActivity">
 
-    <TextView
-        android:text="For this level, we are going to..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:id="@+id/text_description"
-        android:textSize="20sp"
-        android:textColor="#002a48"/>
-
     <Button
         android:text="Play Stage"
         android:layout_width="360dp"
@@ -44,4 +33,41 @@
         android:id="@+id/text_stage"
         android:textSize="24sp"
         android:textColor="#002699"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="1000px"
+        android:layout_below="@+id/text_description"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/tutorial1">
+
+            <TextView
+                android:text="In programming, when you want to perform a task, you use methods. Methods are like mini-tasks that you can call within your program. For example, you can use the method moveForward() to move your car forward. In this stage, you will be using methods (remember: think of them as tasks!) to make your car move forward once"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tutorial1Text"
+                android:textSize="30sp"
+                android:textColor="@android:color/holo_blue_dark" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:text="For this level, we are going to..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/text_description"
+        android:textSize="20sp"
+        android:textColor="#002a48"
+        android:layout_below="@+id/text_stage"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

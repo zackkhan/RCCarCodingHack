@@ -12,7 +12,7 @@ public class DescriptionActivity4 extends AppCompatActivity {
     Button nextButton;
     TextView textDescription;
     TextView textStage;
-
+TextView tutorial1Text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,11 @@ public class DescriptionActivity4 extends AppCompatActivity {
                 startActivity(go);
             }
         });
-        textDescription.setText("Move the car forwards 4 times, then move backwards 4 times. Be careful, you only have one two move blocks!");
+        tutorial1Text = (TextView) findViewById(R.id.tutorial1Text);
+        tutorial1Text.setText("You can use more than one For Loop in your program too! Remember, you still need to close " +
+                "all the For Loops that you use with the } bracket! For this program, you should keep each For Loop seperate" +
+                "(Make sure you close the first For Loop before starting the second one). Good Luck!");
+        textDescription.setText("Move the car forward 4 times, then backward 4 times. You only have one two move blocks!");
         textStage.setText("Stage 4");
     }
 }

@@ -12,6 +12,7 @@ public class DescriptionActivity2 extends AppCompatActivity {
     Button nextButton;
     TextView textDescription;
     TextView textStage;
+    static TextView tutorial1Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +31,9 @@ public class DescriptionActivity2 extends AppCompatActivity {
         });
         textDescription.setText("Move the car forwards twice, and then turn left!");
         textStage.setText("Stage 2");
+        tutorial1Text = (TextView) findViewById(R.id.tutorial1Text);
+        tutorial1Text.setText("Remember that methods like moveForward(); are mini-programs that perform tasks." +
+                "You can have more than one method in your program! For this stage, you will need three methods." +
+                "Good luck!");
     }
 }
